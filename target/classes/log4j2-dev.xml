@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+    <Properties>
+    	<Property name="APP_NAME">send_email</Property>
+        <Property name="LOG_FILE_PATH">D:/logs/email/</Property>
+        <Property name="LOG_LEVEL_PATTERN">%5p</Property>
+        <Property name="CONSOLE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss,SSS} %-5level %c.%M():%L - %msg%xEx%n</Property>
+        <Property name="FILE_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss,SSS} ${LOG_LEVEL_PATTERN}  --- [%t] %c.%M():%L - %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="CONSOLE" target="system_out" follow="true">
+            <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}" />
+        </Console>
+
+        <RollingFile name="ZIYUN_ROLLING_FILE" fileName="${sys:LOG_FILE_PATH}/send_email.log" filePattern="${sys:LOG_FILE_PATH}/send_email-%d{yyyy-MM-dd}_%i.log" append="true">
+            <PatternLayout pattern="${sys:FILE_LOG_PATTERN}" charset="utf-8"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="250 MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+ 
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="ZIYUN_ROLLING_FILE"/>
+        </Root>
+        <Logger name="org.springframework" level="info" />
+        <Logger name="ma.glasnost.orika" level="info" />
+        <Logger name="org.apache.ibatis" level="info" />
+
+        <Logger name="org.mybatis.spring" level="info" />
+        <Logger name="com.github.miemiedev" level="info" />
+        <Logger name="org.thymeleaf.TemplateEngine" level="info" />
+        <Logger name="org.apache.commons" level="info" />
+
+    </Loggers>
+</Configuration>
