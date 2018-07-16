@@ -11,5 +11,11 @@ public class RequestEmailSendDTO {
 
     private String emailSubject;
 
+    private String from;
+
+    private String password;
+
+    private String emailType;
+
 }
 

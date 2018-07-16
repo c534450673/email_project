@@ -48,6 +48,9 @@ public class EmailSend {
 		String context = requestEmailSendDTO.getContext();
 		String sendTo = requestEmailSendDTO.getSendTo();
 		String subject = requestEmailSendDTO.getEmailSubject();
+		String from = requestEmailSendDTO.getFrom();
+		String password = requestEmailSendDTO.getPassword();
+		String emailType = requestEmailSendDTO.getEmailType();
 
 		/**
 		 * 验证body参数是否为空
@@ -55,6 +58,9 @@ public class EmailSend {
 		Map parameterInfos = new HashMap<String,String>();
 		parameterInfos.put("context",context);
 		parameterInfos.put("sendTo",sendTo);
+		parameterInfos.put("from",from);
+		parameterInfos.put("password",password);
+		parameterInfos.put("emailType",emailType);
 		ParamValidation.validateRequiredData(parameterInfos);
 
 		/**
@@ -64,6 +70,9 @@ public class EmailSend {
 		mailBean.setTo(sendTo);
     	mailBean.setContent(context);
     	mailBean.setSubject(subject);
+    	mailBean.setFrom(from);
+    	mailBean.setPassword(password);
+    	mailBean.setEmailType(emailType);
 
     	/**
 		 * 邮件发送

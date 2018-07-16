@@ -100,7 +100,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>1.3.0.RELEASE</version><!--非常重要，不可删除！！-->
                 <configuration><!-- 指定该Main Class为全局的唯一入口 -->
-                    <mainClass>com.ziyun.login.ApiApplication</mainClass>
+                    <mainClass>com.subo.ApiApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

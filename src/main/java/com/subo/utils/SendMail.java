@@ -27,10 +27,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.subo.entity.MailBean;
- 
+
 public class SendMail {
 	
 	private final static Logger logger = LoggerFactory.getLogger(SendMail.class);
+
+	private static String fromEmail ;
+
+	private static String password;
 	/*private static Log log = Log.getLogger(SendMail.class);
     public static String toChinese(String text) {
         try {
@@ -71,7 +75,7 @@ public class SendMail {
      */
     public static boolean sendMail(MailBean mb) throws UnsupportedEncodingException {
     	logger.debug("read obj");
-    	String from = PropertyUtil.getProperty("user");//邮件发送人
+        fromEmail = mb.getFrom();//邮件发送人
         //String subject = PropertyUtil.getProperty("subject");//邮件主题
         String subject = mb.getSubject();
         String content = mb.getContent();
@@ -79,13 +83,25 @@ public class SendMail {
         Vector<String> file = mb.getFile();
         String type = mb.getType();
         String nick = mb.getNick();
+        String emailType = mb.getEmailType();
+        password = mb.getPassword();
         
         logger.debug("read properties");
         Properties props = System.getProperties();
         logger.debug("get host");
-        props.put("mail.smtp.host", PropertyUtil.getProperty("host"));                // 设置SMTP的主机
+        String host = "";
+        if(MailBean.EMAIL_TYPE.QQ.value().equalsIgnoreCase(emailType)){
+            host = PropertyUtil.getProperty("qqHost");                              // 设置SMTP的主机
+        }else if(MailBean.EMAIL_TYPE.EARTH.value().equalsIgnoreCase(emailType)){
+            host = PropertyUtil.getProperty("earthHost");
+        }else if(MailBean.EMAIL_TYPE.NET_EASE.value().equalsIgnoreCase(emailType)){
+            host = PropertyUtil.getProperty("netEaseHost");
+        }
+
+        props.put("mail.smtp.host",host);
+
         props.put("mail.smtp.auth", "true");            // 需要经过验证
-        if(PropertyUtil.getProperty("host").contains("gmail")){
+        if(host.contains("gmail")){
         	props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory"); 
         	props.setProperty("mail.smtp.socketFactory.fallback", "false"); 
         	props.setProperty("mail.smtp.port", "465"); 
@@ -95,7 +111,7 @@ public class SendMail {
         logger.debug("authen password");
         Session session = Session.getInstance(props, new Authenticator() {
             public PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(PropertyUtil.getProperty("user"),  PropertyUtil.getProperty("pwd"));
+                return new PasswordAuthentication(fromEmail,   password);
             }
         });
  
@@ -104,9 +120,9 @@ public class SendMail {
             MimeMessage msg = new MimeMessage(session);
             if(StringUtils.isNotBlank(nick)){
             	nick = MimeUtility.encodeText(nick);
-            	from = nick+"<"+from+">";
+                fromEmail = nick+"<"+fromEmail+">";
             }
-            msg.setFrom(new InternetAddress(from));
+            msg.setFrom(new InternetAddress(fromEmail));
             new InternetAddress();
             logger.debug("转化发送地址！");
 			InternetAddress[] address = InternetAddress.parse(mb.getTo());

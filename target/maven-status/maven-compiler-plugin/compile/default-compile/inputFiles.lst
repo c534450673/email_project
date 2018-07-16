@@ -1,10 +1,15 @@
 D:\workspace\email_project\src\main\java\com\subo\ApiApplication.java
+D:\workspace\email_project\src\main\java\com\subo\RequestDTO\RequestEmailSendDTO.java
 D:\workspace\email_project\src\main\java\com\subo\common\ResponseDTO.java
 D:\workspace\email_project\src\main\java\com\subo\apis\EmailSend.java
 D:\workspace\email_project\src\main\java\com\subo\handler\ValidationHandler.java
-D:\workspace\email_project\src\main\java\com\subo\handler\ParamaterCoverHandler.java
+D:\workspace\email_project\src\main\java\com\subo\utils\ParamValidation.java
+D:\workspace\email_project\src\main\java\com\subo\utils\TransferRequestBody.java
 D:\workspace\email_project\src\main\java\com\subo\Constants\Code.java
+D:\workspace\email_project\src\main\java\com\subo\exception\ParametersMissException.java
 D:\workspace\email_project\src\main\java\com\subo\utils\ServletRequestStore.java
+D:\workspace\email_project\src\main\java\com\subo\exception\ParameterValidationException.java
+D:\workspace\email_project\src\main\java\com\subo\utils\RequestUtils.java
 D:\workspace\email_project\src\main\java\com\subo\configs\JacksonConfig.java
 D:\workspace\email_project\src\main\java\com\subo\exception\BaseException.java
 D:\workspace\email_project\src\main\java\com\subo\configs\JerseyConfig.java

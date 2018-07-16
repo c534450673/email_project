@@ -17,6 +17,23 @@ public class MailBean {
 	private String filename; // 附件的文件名
 	private String type; // type text html类别
 	private String nick; // 昵称
+	private String emailType; // 邮件类型
+
+	public enum EMAIL_TYPE{
+
+		EARTH("earth"),
+		QQ("qq"),
+		NET_EASE("netEase");
+
+		private final String value;
+		EMAIL_TYPE(String value) {
+			this.value = value;
+		}
+		public String value() {
+			return value;
+		}
+
+	}
 
 	public Vector<String> getFile() {
 		return file;
